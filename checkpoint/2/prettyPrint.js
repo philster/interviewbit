@@ -41,17 +41,10 @@ module.exports = {
         output[i][j] = 0;
       }
     }
-    // populate array
+    // populate array, spiral manner
     for (var i = 0; i < A - 1; i++) {
-      var n = A; 
-      for (var j = 0; j < i; j++) {
-        output[i][j] = n;  // top
-        output[j][2 * A - i - 2] = n;  // right
-        output[2 * A - i - 2][2 * A - j - 2] = n;  // bottom
-        output[2 * A - j - 2][i] = n;  // left
-        n--;
-      }
-      for (var j = i; j < A; j++) {
+      for (var j = i; j < 2 * A - i - 2; j++) {
+        var n = A - i;
         output[i][j] = n;  // top
         output[j][2 * A - i - 2] = n;  // right
         output[2 * A - i - 2][2 * A - j - 2] = n;  // bottom
@@ -63,7 +56,15 @@ module.exports = {
 	}
 };
 
+function print2DMatrix(arr){
+  return arr.reduce(function (rows, r) {
+    return rows + r.reduce(function (cols, c) {
+      return cols + c + ' ';
+    }, '') + '\n';
+  }, '');
+}
+
 console.log('Input: A = 4.');
-console.log('Output:\n' + module.exports.prettyPrint(4));
+console.log('Output:\n' + print2DMatrix(module.exports.prettyPrint(4)));
 console.log('Input: A = 3.');
-console.log('Output:\n' + module.exports.prettyPrint(3));
+console.log('Output:\n' + print2DMatrix(module.exports.prettyPrint(3)));
