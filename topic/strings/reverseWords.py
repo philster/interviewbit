@@ -28,3 +28,8 @@ class Solution:
         if word != '':
             list.insert(0, word)
         return ' '.join(list)
+
+if __name__ == '__main__':
+    s = "the sky is blue"
+    print 'Input : ' + s
+    print 'Output: ' + Solution().reverseWords(s)

@@ -34,4 +34,15 @@ class Solution:
                 for j in cols_to_mark:
                     A[i][j] = 0
         return A
-        
+
+def printArray(arr):
+    s = [[str(e) for e in row] for row in arr]
+    lens = [max(map(len, col)) for col in zip(*s)]
+    fmt = ' '.join('{{:{}}}'.format(x) for x in lens)
+    table = [fmt.format(*row) for row in s]
+    return '\n'.join(table)
+
+if __name__ == '__main__':
+    A = [[1,0,1], [1,1,1], [1,1,1]]
+    print 'Input:\n' + printArray(A)
+    print 'Output:\n' + printArray(Solution().setZeroes(A))
