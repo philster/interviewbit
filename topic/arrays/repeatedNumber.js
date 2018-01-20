@@ -34,4 +34,4 @@ module.exports = {
 
 var arr = [3,4,1,4,1];
 console.log('Input:\n' + arr.join(','));
-console.log('Output:\n' + arr.join(','));
+console.log('Output:\n' + module.exports.repeatedNumber(arr));
