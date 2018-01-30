@@ -7,10 +7,10 @@
 #
 # Here are few examples.
 #
-#   [1,3,5,6], 5 → 2
-#   [1,3,5,6], 2 → 1
-#   [1,3,5,6], 7 → 4
-#   [1,3,5,6], 0 → 0
+#   [1,3,5,6], 5 -> 2
+#   [1,3,5,6], 2 -> 1
+#   [1,3,5,6], 7 -> 4
+#   [1,3,5,6], 0 -> 0
 #
 
 class Solution:
@@ -32,7 +32,9 @@ class Solution:
         if lo > hi:
             return lo
         return result                
-                
-# A : [ 1, 3, 5, 6 ]
-# B : 7
-# -> 4
+
+if __name__ == '__main__':
+    A = [1,3,5,6]
+    B = 7
+    print 'Input: [' + ','.join(str(x) for x in A) + '], ' + str(B)
+    print 'Return: ' + str(Solution().searchInsert(A, B))  # 4

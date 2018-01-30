@@ -38,8 +38,11 @@ class Solution:
                 
         return result
 
-# A: 11
-# Output: 3
+if __name__ == '__main__':
+    A = 11
+    print 'Input: ' + str(A)
+    print 'Return: ' + str(Solution().sqrt(A))  # 3
 
-# A: 930675566
-# Output: 30506
+    A = 930675566
+    print 'Input: ' + str(A)
+    print 'Return: ' + str(Solution().sqrt(A))  # 30506
