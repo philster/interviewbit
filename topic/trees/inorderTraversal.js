@@ -1,7 +1,7 @@
 /**
- * Preorder Traversal
+ * Inorder Traversal
  * 
- * Given a binary tree, return the preorder traversal of its nodes’ values.
+ * Given a binary tree, return the inorder traversal of its nodes’ values.
  * 
  * Example:
  * Given binary tree
@@ -12,7 +12,7 @@
  *     /
  *    3
  * 
- * return [1,2,3].
+ * return [1,3,2].
  * 
  * Using recursion is not allowed.
  */
@@ -20,72 +20,62 @@
 module.exports = { 
     //param A : root node of tree
     //return a array of integers
-    preorderTraversal : function(A){
+    inorderTraversal : function(A){
         var result = [];
 
+        /*
+        // solution 1 -- no recursion, use stack
         if (A === null) {
             return [];
         }
 
-        // solution 1: use stack -- time limit exceeded?
-        // create a stack
+        var node = A;
         var stack = [];
-        // push root to stack
-        stack.push(A);
+        var done = false;
         
-        // pop all items one by one, and for each item do the following:
-        // 1) print result, 2) push right child, 3) push left child
-        while (stack.length > 0) {
-            var node = stack.pop();
+        while (!done) {
             if (node !== null) {
+                stack.push(node);
+                node = node.left;
+            } else if (stack.length > 0) {
+                node = stack.pop();
                 result.push(node.data);
-            }
-            if (node.right !== null) {
-                stack.push(node.right);
-            }
-            if (node.left !== null) {
-                stack.push(node.left);
+                node = node.right;
+            } else {
+                done = true;
             }
         }
+        */
 
-        /*
-        // solution 2: no need of stack, but requires modifying the tree -- time limit exceeded?
+        // solution 2 (Morris Traversal) -- no recursion, no stack
         var curr = A;
         while (curr !== null) {
-            // if left child is null, print current node data
-            // then update current pointer to the right child
             if (curr.left === null) {
                 result.push(curr.data);
                 curr = curr.right;
             } else {
-                // find the inorder predecessor
-                var prev = curr.left;
-
-                while (prev.right !== null && prev.right !== curr) {
-                    prev = prev.right;
+                // find inorder predecessor of current
+                var pred = curr.left;
+                while (pred.right !== null && pred.right !== curr) {
+                    pred = pred.right;
                 }
-
-                // if the right child of inorder predecessor already points to the current node,
-                // update the current with it's right child
-                if (prev.right === curr) {
-                    prev.right = null;
-                    curr = curr.right;
-                } else {
-                    // else if right child doesn't point to the current node,
-                    // then print this node's data and update the right child pointer with the current node
-                    // and update the current with it's left child
-                    result.push(curr.data);
-                    prev.right = curr;
+                // make current the right child of its inorder predecessor
+                if (pred.right == null) {
+                    pred.right = curr;
                     curr = curr.left;
+                } else {
+                    // revert the changes made in the if-part above to restore the original tree
+                    pred.right = null;
+                    result.push(curr.data);
+                    curr = curr.right;
                 }
             }
         }
-        */
-	    
+
         return result;
     }
 };
-
+   
 // Definition for a binary tree node
 //    function TreeNode(data){
 //      this.data = data
@@ -98,65 +88,6 @@ function TreeNode(data){
     this.right = null;
 }
 
-/*
-function insertNode(root, data) {
-    if (root === null) {
-        root = new TreeNode(data);
-    } else if (data <= root.data) {
-        // insert in left subtree
-        root.left = insertNode(root.left, data);
-    } else if (data <= root.data) {
-        // insert in right subtree
-        root.right = insertNode(root.right, data);
-    }
-    return root;
-}
-
-function BinaryTree(arr){
-    var root = null;
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i] !== -1) {
-            root = insertNode(root, arr[i]);
-        }
-    }
-    return root;
-}
-
-function printTree(tree){
-    if (tree === null) {
-        return null;
-    }
-    var str = '';
-
-    // create empty queue for level order traversal
-    var queue = [];
-    // enqueue root
-    queue.push(tree);
-
-    while (queue.length > 0) {
-        // print front of queue then remove it from queue
-        str += queue[0].data + '\n';
-        var node = queue.shift();
-
-        // enqueue left child
-        if (node.left !== null) {
-            str += '/ ';
-            queue.push(node.left);
-        }
-
-        // enqueue right child
-        if (node.right !== null) {
-            str += '\\ ';
-            queue.push(node.right);
-        }
-
-        str += '\n';
-    }
-
-    return str;
-}
-*/
-
 //    1
 //     \
 //      2
@@ -165,9 +96,8 @@ function printTree(tree){
 var root = new TreeNode(1);
 root.right = new TreeNode(2);
 root.right.left = new TreeNode(3);
-var bt = root; // fix this later
-// console.log('Input  :\n' + printTree(bt));
-console.log('Output : [' + module.exports.preorderTraversal(bt).join(', ') + ']');
+console.log('Input  : ');
+console.log('Output : [' + module.exports.inorderTraversal(root).join(', ') + ']');  // [1,3,2]
 
 // There are 1 lines in the input
 //
