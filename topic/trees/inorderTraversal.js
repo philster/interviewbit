@@ -24,7 +24,15 @@ module.exports = {
         var result = [];
 
         /*
-        // solution 1 -- no recursion, use stack
+        // solution 1 (recursion) -- time limit exceeded?
+        if (A === null) {
+            return [];
+        }
+        result = [].concat(module.exports.inorderTraversal(A.left), A.data, module.exports.inorderTraversal(A.right));
+        */
+
+        /*
+        // solution 2 (no recursion, use stack) -- time limit exceeded?
         if (A === null) {
             return [];
         }
@@ -47,7 +55,7 @@ module.exports = {
         }
         */
 
-        // solution 2 (Morris Traversal) -- no recursion, no stack
+        // solution 3 (Morris Traversal: no recursion, no stack) -- time limit exceeded?
         var curr = A;
         while (curr !== null) {
             if (curr.left === null) {

@@ -29,6 +29,7 @@ module.exports = {
             return B === 0 ? 1 : 0;
         }
 
+        // solution 1 -- time limit exceeded?
         var result = 0;
         var partial = B - A.data;
         
@@ -46,7 +47,7 @@ module.exports = {
     }
 };
 
-// Definition for a  binary tree node
+// Definition for a binary tree node
 //    function TreeNode(data){
 //      this.data = data
 //      this.left = null

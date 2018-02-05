@@ -41,23 +41,17 @@ function TreeNode(data){
     this.right = null;
 }
 
-/*
-function printTree(tree){
-    // TODO
-    var str = '';
-    return str;
-}
-*/
-
 //         1
 //        /
 //       2
 var root = new TreeNode(1);
 root.left = new TreeNode(2);
-// console.log('Input  : ' + printTree(root));
-console.log('Output : ' + module.exports.maxDepth(root));
+console.log('Output : ' + module.exports.maxDepth(root));  // 2
 
-// input:
-// 7 1 2 3 -1 -1 -1 -1
-// expected output:
-// 2
+//         1
+//        / \
+//       2   3
+var root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+console.log('Output : ' + module.exports.maxDepth(root));  // 2
