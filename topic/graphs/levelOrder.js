@@ -33,8 +33,6 @@ module.exports = {
         var result = [];
 
         // create empty queue for level order traversal
-        // var queue = [];
-        // queue.push(A);
         var queue = new Queue();
         queue.enqueue(A);
 
