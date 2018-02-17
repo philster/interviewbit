@@ -78,35 +78,20 @@ function TreeNode(data){
 }
 
 function Queue() {
-    var _head = null;
-    var _size = 0;
+    var _items;
 
     this.enqueue = function (data) {
-        var node = { data: data, next: null };
-        if (_head === null) {
-            _head = node;
-        } else {
-            var curr = _head;
-            while (curr.next !== null) {
-                curr = curr.next;
-            }
-            curr.next = node;
+        if (typeof items === 'undefined') {
+            items = [];
         }
-        _size++;
-        return _size;
+        items.push(data);
+        return items.length;
     };
     this.dequeue = function () {
-        if (_head === null) {
-            return null;
-        } else {
-            var node = _head;
-            _head = _head.next;
-            _size--;
-            return node.data;
-        }
+        return items.shift();
     };
     this.size = function () {
-        return _size;
+        return items.length;
     };
 }
 
