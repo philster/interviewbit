@@ -1,18 +1,20 @@
 /**
+ * https://www.interviewbit.com/problems/all-unique-permutations/
+ *
  * All Unique PermutationsBookmark Suggest Edit
  *
  * Given a collection of numbers that might contain duplicates, return all possible unique permutations.
- * 
+ *
  * Example :
  * [1,1,2] have the following unique permutations:
- * 
+ *
  * [1,1,2]
  * [1,2,1]
  * [2,1,1]
- * 
+ *
  * NOTE : No 2 entries in the permutation sequence should be the same.
  */
-module.exports = { 
+module.exports = {
   //param A : array of integers
   //return a array of array of integers
   permute : function(A){
@@ -25,7 +27,7 @@ module.exports = {
         results.push(arr.slice());
         return results;
       }
-  
+
       for (var i = 0; i < arr.length; i++) {
         var firstElem = arr[i];
         var elemsLeft = arr.filter(function (elem, idx) {
